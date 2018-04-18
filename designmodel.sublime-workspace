@@ -1,0 +1,955 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"argu",
+				"arguments"
+			],
+			[
+				"price",
+				"price100"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "发布订阅模式（观察者模式）/8.8.html",
+			"settings":
+			{
+				"buffer_size": 1836,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "发布订阅模式（观察者模式）/8.11.html",
+			"settings":
+			{
+				"buffer_size": 6021,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "策略模式/5.6.3.html",
+			"settings":
+			{
+				"buffer_size": 3040,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "命令模式/9.2.html",
+			"settings":
+			{
+				"buffer_size": 1832,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "命令模式/9.3.html",
+			"settings":
+			{
+				"buffer_size": 1658,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "命令模式/9.4.html",
+			"settings":
+			{
+				"buffer_size": 1475,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "命令模式/9.5.html",
+			"settings":
+			{
+				"buffer_size": 1104,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "享元模式/12.1.html",
+			"settings":
+			{
+				"buffer_size": 663,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "享元模式/12.3.html",
+			"settings":
+			{
+				"buffer_size": 2025,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "享元模式/12.4.html",
+			"settings":
+			{
+				"buffer_size": 3929,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "享元模式/12.7.21.html",
+			"settings":
+			{
+				"buffer_size": 1251,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <title>职责链模式</title>\n</head>\n\n<body>\n    <script>\n    var order = function(orderType, pay, stock) {\n        if (orderType === 1) { // 500 元定金购买模式\n            if (pay === true) { // 已支付定金\n                console.log('500 元定金预购, 得到 100 优惠券');\n            } else { // 未支付定金，降级到普通购买模式\n                if (stock > 0) { // 用于普通购买的手机还有库存\n                    console.log('普通购买, 无优惠券');\n                } else {\n                    console.log('手机库存不足');\n                }\n            }\n        } else if (orderType === 2) { // 200 元定金购买模式\n            if (pay === true) {\n                console.log('200 元定金预购, 得到 50 优惠券');\n            } else {\n                if (stock > 0) {\n                    console.log('普通购买, 无优惠券');\n                } else {\n                    console.log('手机库存不足');\n                }\n            }\n        } else if (orderType === 3) {\n            if (stock > 0) {\n                console.log('普通购买, 无优惠券');\n            } else {\n                console.log('手机库存不足');\n            }\n        }\n    };\n    order(1, true, 500); // 输出： 500 元定金预购, 得到 100 优惠券\n    //这样条件一多就很巨大且难以阅读\n\n    // 用职责链模式重构代码\n    var order500 = function(orderType, pay, stock) {\n        if (orderType === 1 && pay === true) {\n            console.log('500 元定金预购, 得到 100 优惠券');\n        } else {\n            order200(orderType, pay, stock); // 将请求传递给 200 元订单\n        }\n    };\n    // 200 元订单\n    var order200 = function(orderType, pay, stock) {\n        if (orderType === 2 && pay === true) {\n            console.log('200 元定金预购, 得到 50 优惠券');\n        } else {\n            orderNormal(orderType, pay, stock); // 将请求传递给普通订单\n        }\n    };\n    // 普通购买订单\n    var orderNormal = function(orderType, pay, stock) {\n        if (stock > 0) {\n            console.log('普通购买, 无优惠券');\n        } else {\n            console.log('手机库存不足');\n        }\n    };\n    // 测试结果：\n    order500(1, true, 500); // 输出：500 元定金预购, 得到 100 优惠券\n    order500(1, false, 500); // 输出：普通购买, 无优惠券\n    order500(2, true, 500); // 输出：200 元定金预购, 得到 500 优惠券\n    order500(3, false, 500); // 输出：普通购买, 无优惠券\n    order500(3, false, 0); // 输出：手机库存不足\n    </script>\n</body>\n\n</html>",
+			"file": "职责链模式/13.3.html",
+			"file_size": 1524,
+			"file_write_time": 131684903890926256,
+			"settings":
+			{
+				"buffer_size": 2182,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "职责链模式/13.4.html",
+			"settings":
+			{
+				"buffer_size": 2333,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "jquery2.2.4.js",
+			"settings":
+			{
+				"buffer_size": 257550,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "aop.html",
+			"settings":
+			{
+				"buffer_size": 884,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "命令模式/animate.js",
+			"settings":
+			{
+				"buffer_size": 2193,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "star",
+		"selected_items":
+		[
+			[
+				"star",
+				"SublimeServer: Start SublimeServer"
+			],
+			[
+				"server",
+				"SublimeServer: Stop SublimeServer"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"erver",
+				"SublimeServer: Manage SublimeServer Settings"
+			],
+			[
+				"sub",
+				"SublimeServer: Start SublimeServer"
+			],
+			[
+				"start",
+				"SublimeServer: Start SublimeServer"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"list pa",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/learn/设计模式"
+	],
+	"file_history":
+	[
+		"/D/learn/设计模式/命令模式/knowEventloop.js",
+		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.4.html",
+		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.8.html",
+		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.7.html",
+		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.6.html",
+		"/D/learn/设计模式/迭代器模式/7.1.html",
+		"/D/learn/设计模式/代理模式/6.8.html",
+		"/D/learn/设计模式/代理模式/6.7.html",
+		"/D/learn/设计模式/代理模式/6.5.html",
+		"/D/learn/设计模式/代理模式/6.3.html",
+		"/D/learn/设计模式/代理模式/6.4.html",
+		"/D/learn/设计模式/jquery2.2.4.js",
+		"/C/Users/Administrator/Downloads/jquery-sizzle-2.3.3-13-g3116795/sizzle.js",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/SublimeServer.sublime-settings",
+		"/D/learn/设计模式/策略模式/5.1.html",
+		"/D/learn/设计模式/策略模式/5.2(important).html",
+		"/D/learn/设计模式/策略模式/5.3or4or5.html",
+		"/D/learn/设计模式/策略模式/5.6.1.html",
+		"/D/learn/设计模式/策略模式/5.6.2.html",
+		"/D/learn/设计模式/策略模式/5.6.3.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/JsFormat/Default (Windows).sublime-keymap",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/Default (Windows).sublime-keymap",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/banks/web/app.js",
+		"/D/banks/web/public/templates/router.js",
+		"/D/banks/web/public/templates/index/index.js",
+		"/D/banks/web/public/libs/require/text.js",
+		"/D/banks/web/public/templates/main.js",
+		"/C/Users/Administrator/Desktop/em.html",
+		"/C/Users/Administrator/Desktop/h.html",
+		"/C/Users/Administrator/Desktop/ipv6tb"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 110.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"delFile",
+			"一",
+			"Cache",
+			"cache",
+			"saleOffice",
+			"call",
+			"argument",
+			"trigger",
+			"event"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 14,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "发布订阅模式（观察者模式）/8.8.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1836,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1805,
+								1805
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 726.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "发布订阅模式（观察者模式）/8.11.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1846,
+								1846
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 885.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "策略模式/5.6.3.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3040,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2197,
+								2197
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 110.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "命令模式/9.2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1614,
+								1614
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 533.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "命令模式/9.3.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								905,
+								905
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "命令模式/9.4.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1270,
+								1270
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 269.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "命令模式/9.5.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								567,
+								567
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 462.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "享元模式/12.1.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 663,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								485,
+								485
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "享元模式/12.3.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								424
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 66.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "享元模式/12.4.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3704,
+								3704
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2073.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "享元模式/12.7.21.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								901,
+								901
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "职责链模式/13.3.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2182,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1373,
+								1373
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 93.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "职责链模式/13.4.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2333,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2302,
+								2302
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 858.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "jquery2.2.4.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 257550,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "aop.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 884,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								705
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "命令模式/animate.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								709,
+								709
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 594.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "发布订阅模式（观察者模式）/8.11.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6021,
+								6021
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2312.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "designmodel.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"6.4",
+				"代理模式\\6.4.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\Administrator\\Desktop\\web\\webh5.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 173.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

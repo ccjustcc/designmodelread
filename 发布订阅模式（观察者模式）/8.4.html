@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>发布订阅模式</title>
+</head>
+
+<body>
+    <script>
+    // 发布 — 订阅模式可以广泛应用于异步编程中，这是一种替代传递回调函数的方案。
+    //自定义事件
+    var saleOffices = {};
+    saleOffices.clientList = []; //存回调方法
+    saleOffices.addListener = function(key,fn) {
+    	//这里有一个问题 就是订阅没有分类 加key doned
+    	if(!this.clientList[key]){
+    		this.clientList[key]=[];
+    	}
+        this.clientList[key].push(fn);
+    }
+    saleOffices.trigger = function() {
+    	// call(object,argu1,argu2) apply(object,[argu1,argu2...])
+    	var key = Array.prototype.shift.call(arguments),
+    		fnList = this.clientList[key];
+    	if(!fnList){ 
+    		// fns.length === 0  ???
+    		return false;
+    	}	
+        for (var i = 0, fn; fn = fnList[i++];) {
+            fn.apply(this, arguments);
+        }
+    }
+
+    saleOffices.addListener('price100',function(price, squareMeter) { // 小明订阅消息
+        console.log('price100= ' + price);
+        console.log('squareMeter= ' + squareMeter);
+    });	
+    saleOffices.addListener('price80',function(price, squareMeter) { // 小红订阅消息
+        console.log('price80= ' + price);
+        console.log('squareMeter= ' + squareMeter);
+    });
+    saleOffices.trigger('price80',2000000, 88); // 输出：200 万，88 平方米
+    saleOffices.trigger('price100',3000000, 110); // 输出：300 万，110 平方米
+    
+    </script>
+</body>
+
+</html>
