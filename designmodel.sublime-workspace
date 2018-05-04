@@ -115,10 +115,7 @@
 			}
 		},
 		{
-			"contents": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <title>职责链模式</title>\n</head>\n\n<body>\n    <script>\n    var order = function(orderType, pay, stock) {\n        if (orderType === 1) { // 500 元定金购买模式\n            if (pay === true) { // 已支付定金\n                console.log('500 元定金预购, 得到 100 优惠券');\n            } else { // 未支付定金，降级到普通购买模式\n                if (stock > 0) { // 用于普通购买的手机还有库存\n                    console.log('普通购买, 无优惠券');\n                } else {\n                    console.log('手机库存不足');\n                }\n            }\n        } else if (orderType === 2) { // 200 元定金购买模式\n            if (pay === true) {\n                console.log('200 元定金预购, 得到 50 优惠券');\n            } else {\n                if (stock > 0) {\n                    console.log('普通购买, 无优惠券');\n                } else {\n                    console.log('手机库存不足');\n                }\n            }\n        } else if (orderType === 3) {\n            if (stock > 0) {\n                console.log('普通购买, 无优惠券');\n            } else {\n                console.log('手机库存不足');\n            }\n        }\n    };\n    order(1, true, 500); // 输出： 500 元定金预购, 得到 100 优惠券\n    //这样条件一多就很巨大且难以阅读\n\n    // 用职责链模式重构代码\n    var order500 = function(orderType, pay, stock) {\n        if (orderType === 1 && pay === true) {\n            console.log('500 元定金预购, 得到 100 优惠券');\n        } else {\n            order200(orderType, pay, stock); // 将请求传递给 200 元订单\n        }\n    };\n    // 200 元订单\n    var order200 = function(orderType, pay, stock) {\n        if (orderType === 2 && pay === true) {\n            console.log('200 元定金预购, 得到 50 优惠券');\n        } else {\n            orderNormal(orderType, pay, stock); // 将请求传递给普通订单\n        }\n    };\n    // 普通购买订单\n    var orderNormal = function(orderType, pay, stock) {\n        if (stock > 0) {\n            console.log('普通购买, 无优惠券');\n        } else {\n            console.log('手机库存不足');\n        }\n    };\n    // 测试结果：\n    order500(1, true, 500); // 输出：500 元定金预购, 得到 100 优惠券\n    order500(1, false, 500); // 输出：普通购买, 无优惠券\n    order500(2, true, 500); // 输出：200 元定金预购, 得到 500 优惠券\n    order500(3, false, 500); // 输出：普通购买, 无优惠券\n    order500(3, false, 0); // 输出：手机库存不足\n    </script>\n</body>\n\n</html>",
 			"file": "职责链模式/13.3.html",
-			"file_size": 1524,
-			"file_write_time": 131684903890926256,
 			"settings":
 			{
 				"buffer_size": 2182,
@@ -136,18 +133,64 @@
 			}
 		},
 		{
-			"file": "jquery2.2.4.js",
-			"settings":
-			{
-				"buffer_size": 257550,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "aop.html",
 			"settings":
 			{
 				"buffer_size": 884,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "中介者模式/14.2.html",
+			"settings":
+			{
+				"buffer_size": 2899,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "中介者模式/14.3.html",
+			"settings":
+			{
+				"buffer_size": 3577,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "中介者模式/14.3.1.html",
+			"settings":
+			{
+				"buffer_size": 2704,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "装饰者模式/15.1.html",
+			"settings":
+			{
+				"buffer_size": 524,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "状态模式/16.1.html",
+			"settings":
+			{
+				"buffer_size": 1014,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "状态模式/16.1.2.html",
+			"settings":
+			{
+				"buffer_size": 1797,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -252,10 +295,14 @@
 	},
 	"expanded_folders":
 	[
-		"/D/learn/设计模式"
+		"/D/learn/设计模式",
+		"/D/learn/设计模式/状态模式"
 	],
 	"file_history":
 	[
+		"/D/learn/设计模式/中介者模式/14.3.html",
+		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.11.html",
+		"/D/learn/设计模式/中介者模式/14.2.2.html",
 		"/D/learn/设计模式/命令模式/knowEventloop.js",
 		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.4.html",
 		"/D/learn/设计模式/发布订阅模式（观察者模式）/8.8.html",
@@ -290,11 +337,11 @@
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 32.0
 	},
 	"find_in_files":
 	{
-		"height": 110.0,
+		"height": 111.0,
 		"where_history":
 		[
 		]
@@ -304,6 +351,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n    ",
+			"员 轩辕 专享 尊重版权\n    194 第 14 章 中介者模式\n    让红队玩家全部死亡：",
 			"delFile",
 			"一",
 			"Cache",
@@ -330,7 +379,7 @@
 	"groups":
 	[
 		{
-			"selected": 14,
+			"selected": 19,
 			"sheets":
 			[
 				{
@@ -360,7 +409,7 @@
 						"translation.y": 726.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 21,
 					"type": "text"
 				},
 				{
@@ -376,8 +425,8 @@
 						"selection":
 						[
 							[
-								1846,
-								1846
+								425,
+								425
 							]
 						],
 						"settings":
@@ -388,10 +437,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 885.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -421,7 +470,7 @@
 						"translation.y": 110.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 19,
 					"type": "text"
 				},
 				{
@@ -452,7 +501,7 @@
 						"translation.y": 533.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 20,
 					"type": "text"
 				},
 				{
@@ -483,7 +532,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
@@ -514,7 +563,7 @@
 						"translation.y": 269.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 17,
 					"type": "text"
 				},
 				{
@@ -545,7 +594,7 @@
 						"translation.y": 462.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
@@ -576,7 +625,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
@@ -607,7 +656,7 @@
 						"translation.y": 66.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
@@ -638,7 +687,7 @@
 						"translation.y": 2073.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
@@ -661,13 +710,15 @@
 						"settings":
 						{
 							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
@@ -690,13 +741,15 @@
 						"settings":
 						{
 							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 93.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -719,46 +772,19 @@
 						"settings":
 						{
 							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 858.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 13,
-					"file": "jquery2.2.4.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 257550,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
 					"file": "aop.html",
 					"semi_transient": false,
 					"settings":
@@ -770,24 +796,212 @@
 						"selection":
 						[
 							[
-								705,
-								705
+								661,
+								661
 							]
 						],
 						"settings":
 						{
 							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "中介者模式/14.2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2899,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								433,
+								433
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 110.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "中介者模式/14.3.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								3577
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "中介者模式/14.3.1.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2704,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2453,
+								2453
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1012.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "装饰者模式/15.1.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								524,
+								524
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "状态模式/16.1.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1014,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								922,
+								976
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 144.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "状态模式/16.1.2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1797,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1718,
+								1718
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 763.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 20,
 					"file": "命令模式/animate.js",
 					"semi_transient": false,
 					"settings":
@@ -799,8 +1013,8 @@
 						"selection":
 						[
 							[
-								709,
-								709
+								1023,
+								1023
 							]
 						],
 						"settings":
@@ -811,45 +1025,41 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 594.0,
+						"translation.y": 402.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 8,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 1,
-					"file": "发布订阅模式（观察者模式）/8.11.html",
+					"buffer": 15,
+					"file": "中介者模式/14.3.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6021,
+						"buffer_size": 3577,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6021,
-								6021
+								3569,
+								3569
 							]
 						],
 						"settings":
 						{
 							"open_with_edit": true,
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2312.0,
+						"translation.y": 1980.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -857,11 +1067,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 30.0
+		"height": 32.0
 	},
 	"input":
 	{
-		"height": 43.0
+		"height": 45.0
 	},
 	"layout":
 	{
@@ -872,18 +1082,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -897,11 +1100,15 @@
 	{
 		"height": 0.0
 	},
+	"output.nodejs":
+	{
+		"height": 254.0
+	},
 	"pinned_build_system": "",
 	"project": "designmodel.sublime-project",
 	"replace":
 	{
-		"height": 56.0
+		"height": 60.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -910,6 +1117,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"14.3",
+				"设计模式\\中介者模式\\14.3.html"
+			],
 			[
 				"6.4",
 				"代理模式\\6.4.html"
@@ -925,7 +1136,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\Administrator\\Desktop\\web\\webh5.sublime-project"
+				"C:\\Users\\Administrator\\Desktop\\web\\webh5.sublime-workspace"
 			]
 		],
 		"width": 380.0

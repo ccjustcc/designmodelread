@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>电灯程序</title>
+</head>
+
+<body>
+    <script>
+    var Light = function() {
+        this.state = 'off'; // 给电灯设置初始状态 off
+        this.button = null;
+    }
+
+    Light.prototype.init = function() {
+        var button = document.createElement('button'),
+            self = this;
+        button.innerHTML = '开关';
+        this.button = document.body.appendChild(button);
+        this.button.onclick = function() {
+            self.buttonWasPressed();
+        }
+    };
+
+    Light.prototype.buttonWasPressed = function() {
+        if (this.state === 'off') {
+            console.log('开灯');
+            this.state = 'on';
+        } else if (this.state === 'on') {
+            console.log('关灯');
+            this.state = 'off';
+        }
+    };
+
+    var light = new Light();
+    light.init();
+
+
+    //有意思的是，通常我们谈到封装，一般都会优
+    // 先封装对象的行为， 而不是对象的状态。 但在状态模式中刚好相反， 状态模式的关键是把事物的
+    // 每种状态都封装成单独的类， 跟此种状态有关的行为都被封装在这个类的内部，
+    </script>
+</body>
+
+</html>
